@@ -1,4 +1,4 @@
-const Fighter = require("./fighter")
+const {Fighter,maxLife} = require("./fighter")
 
 // First Labour : Heracles vs Nemean Lion
 
@@ -7,7 +7,7 @@ const nemeanLion = new Fighter("🦁 Nemean Lion", 11 , 13)
 
 
 console.log(`Here was the fight of ${heracles.name}  ⚔️ ${nemeanLion.name}`)
-console.log(`${heracles.name} : ${heracles.life}💙 ⚔️ ${nemeanLion.name} : ${nemeanLion.life} 💙`)
+console.log(`${heracles.name} : ${heracles.life}/${maxLife}💙 ⚔️ ${nemeanLion.name} : ${nemeanLion.life}/${maxLife}💙`)
 
 function result(){
     if(heracles.life === 0){
@@ -27,12 +27,12 @@ function brawl(){
         if (nemeanLion.life >0){
             nemeanLion.fight(heracles)
         }
-        else if (heracles.life === 0){
+        if (heracles.life === 0){
             console.log(`${heracles.name} is dead 💀`)
             console.log(`${nemeanLion.name} Wins 🏆`)
             break
         }
-        else if(nemeanLion.life === 0){
+        if(nemeanLion.life === 0){
             console.log(`${nemeanLion.name} is dead 💀`)
             console.log(`${heracles.name} Wins 🏆`)
             break
@@ -40,4 +40,5 @@ function brawl(){
     } 
 }
 brawl()
-
+console.log(heracles.critDmg)
+console.log(heracles.crit())
