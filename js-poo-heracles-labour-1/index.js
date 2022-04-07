@@ -41,4 +41,3 @@ function brawl(){
 }
 brawl()
 console.log(heracles.critDmg)
-console.log(heracles.crit())
