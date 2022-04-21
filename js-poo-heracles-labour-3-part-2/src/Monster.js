@@ -1,5 +1,3 @@
-
-
 class Monster extends Fighter {
 	constructor(
 		name,
@@ -11,7 +9,7 @@ class Monster extends Fighter {
 		y,
 		regen,
 		lifeSteal,
-		armorPiercing,
+		armorPiercing
 	) {
 		super(
 			name,
@@ -23,17 +21,20 @@ class Monster extends Fighter {
 			y,
 			regen,
 			lifeSteal,
-			armorPiercing,
+			armorPiercing
 		);
 	}
-		//affichage
-		getDefense() {
-			return (this.dexterity);
-			}
-	
-			getDamage() {
-				return (this.strength);
-			  }
+	getRange() {
+		return this.range;
+	}
+	//affichage
+	getDefense() {
+		return this.dexterity;
+	}
+
+	getDamage() {
+		return this.strength;
+	}
 	getDefence(defender, attacker) {
 		this.defenceTemp = Math.max(
 			0,
@@ -49,4 +50,3 @@ class Monster extends Fighter {
 	}
 	attackTemp = 0;
 }
-

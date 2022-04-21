@@ -5,13 +5,19 @@ class Fighter {
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.image = image;
-		(this.x = x), (this.y = y), (this.regen = 0);
+		this.x = x;
+		this.y = y;
+    this.range = 1;
+		this.regen = 0;
 		this.lifeSteal = 0;
 		this.armorPiercing = 0;
 		this.life = maxLife;
 		this.critDmg = 1 + this.strength / 100;
 	}
 
+  getRange(){
+    return this.range
+  }
 	crit() {
 		if (this.dexterity > Math.round(Math.random() * 100 + 1)) {
 			console.log(`${this.name} infict a critical hit`);

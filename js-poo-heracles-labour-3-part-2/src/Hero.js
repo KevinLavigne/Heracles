@@ -7,6 +7,7 @@ class Hero extends Fighter {
     image,
     x,
     y,
+    range,
     regen,
     lifeSteal,
     armorPiercing
@@ -17,13 +18,15 @@ class Hero extends Fighter {
       strength,
       dexterity,
       image,
-      X,
-      Y,
+      x,
+      y,
+      range,
       regen,
       lifeSteal,
       armorPiercing
     );
     this.weapon = null;
+    this.subWeapon = null;
     this.shield = null;
     this.lifePotion = 3;
   }
@@ -32,6 +35,12 @@ class Hero extends Fighter {
       attacker.maxLife,
       attacker.life + attacker.maxLife * 0.5
     );
+  }
+  getRange(){
+    return this.weapon ? this.range + this.weapon.range : this.range;
+  }
+  getSubRange(){
+    return this.subWeapon ? this.range + this.subWeapon.range : this.range;
   }
   //affichage
   getDefense() {
@@ -43,7 +52,9 @@ class Hero extends Fighter {
   getDamage() {
     return this.weapon ? this.strength + this.weapon.damage : this.strength;
   }
-
+  getSubDamage() {
+    return this.subWeapon ? this.strength + this.subWeapon.damage : this.strength;
+  }
   //stats réel en combat
   getDefence(defender, attacker) {
     this.defenceTemp = Math.max(
