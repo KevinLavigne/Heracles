@@ -1,7 +1,7 @@
 class Arena {
-    constructor(monsters , hero){
+    constructor(monsters , hero, size =9){
         this.monsters = monsters;
         this.hero = hero
-        this.size = 9
+        this.size = size
     }
 }

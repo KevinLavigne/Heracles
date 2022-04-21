@@ -1,21 +1,11 @@
 class Fighter {
-	constructor(
-		name,
-		maxLife,
-		strength,
-		dexterity,
-		image,
-    x,
-    y
-	) {
+	constructor(name, maxLife, strength, dexterity, image, x, y) {
 		this.name = name;
 		this.maxLife = maxLife;
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.image = image;
-    this.x = x,
-    this.y = y,
-		this.regen = 0;
+		(this.x = x), (this.y = y), (this.regen = 0);
 		this.lifeSteal = 0;
 		this.armorPiercing = 0;
 		this.life = maxLife;
@@ -58,19 +48,17 @@ class Fighter {
 			);
 		}
 	}
-  //affichage
-  getDefense() {
-		return this.shield ?
-		  this.dexterity + this.shield.protection :
-		  this.dexterity;
-		}
+	//affichage
+	getDefense() {
+		return;
+		this.dexterity;
+	}
 
-		getDamage() {
-			return this.weapon ?
-			  this.strength + this.weapon.damage :
-			  this.strength;
-		  }
-      //stats réel en combat
+	getDamage() {
+		return;
+		this.strength;
+	}
+	//stats réel en combat
 	getDefence(defender, attacker) {
 		this.defenceTemp = Math.max(
 			0,
