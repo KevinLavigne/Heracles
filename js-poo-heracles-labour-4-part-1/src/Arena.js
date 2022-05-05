@@ -1,5 +1,5 @@
 class Arena {
-	constructor(monsters, hero, size = 9) {
+	constructor(monsters, hero, size = 9, message) {
 		this.monsters = monsters;
 		this.hero = hero;
 		this.size = size;
@@ -20,74 +20,100 @@ class Arena {
 			return false;
 		}
 	}
-  move(direction) {
-    let oldPosition= {
-			x: this.hero.x,
-			y: this.hero.y
-		}
-		let newPosition= {
-			x: oldPosition.x,
-			y: oldPosition.y
-		}
-		if (direction === "N" && oldPosition.y -1 >= 0){
-			newPosition.y--
-			this.verif(newPosition.x , newPosition.y).length === 0 ? this.hero.y-- : console.log("u can't move on ennemy")
-			console.log(this.hero)
-		}else if (direction === "S" && this.hero.y +1 <= this.size){
-			newPosition.y++
-			this.verif(newPosition.x , newPosition.y).length === 0 ? this.hero.y++ : console.log("u can't move on ennemy")
-			console.log(this.hero)
-		}else if (direction === "W" && this.hero.x -1 >= 0){
-			newPosition.x--
-			this.verif(newPosition.x , newPosition.y).length === 0 ? this.hero.x-- : console.log("u can't move on ennemy")
-			console.log(this.hero)
-		}else if (direction === "E" && this.hero.x +1 <= this.size){
-			newPosition.y--
-			this.verif(newPosition.x , newPosition.y).length === 0 ? this.hero.x++ : console.log("u can't move on ennemy")
-			console.log(this.hero)
-			if (this.verif(newPosition.x , newPosition.y) !== [] ) {con} 
-		} else {
-			console.log("U can't move out of arena")
-		}
-		console.log("new position ")
-		console.log(newPosition)
-		return oldPosition
-  }
-	verif(x , y){
-		return this.monsters.filter(monster => {
-			(monster.x !=	x && monster.y !=	y)
-		})
-	}
-	// move(direction) {
-	// 	 let oldCoord = {
-	// 		x: this.hero.x,
-	// 		y: this.hero.y,
-	// 	};
-	// 	this.verif(direction)
-	// }
-	// verif(direction) {
-	// 	if (direction === "N" && this.hero.y-- >= 0){
-	// 		this.occuped(monster.y, this.hero.y--)
-	// 	}else if (direction === "S" && this.hero.y++ <= this.size){
-	// 		this.occuped(monster.y, this.hero.y++)
-	// 	}else if (direction === "W" && this.hero.x-- >=0){
-	// 		this.occuped(monster.x, this.hero.x--)
-	// 	}else if (direction === "E" && this.hero.x++ <= this.size){
-	// 		this.occuped(monster.x, this.hero.x++)
-	// 	} else {
-	// 		return false
-	// 	}
-	// }
-	// 	occuped(axe , verif) {
-	// 		if (this.monsters.filter(monster => {
-	// 			monster.axe === this.hero.axe - verif 
-	// 		}) !== []){
-	// 			return false && console.log("false")
+	// 	move(direction) {
+	// 		let messages = '';
+	// 		let oldPosition = {
+	// 			x: this.hero.x,
+	// 			y: this.hero.y,
+	// 		};
+
+	// 		if (direction === 'N') this.hero.y--;
+	// 		if (direction === 'S') this.hero.y++;
+	// 		if (direction === 'E') this.hero.x--;
+	// 		if (direction === 'W') this.hero.x++;
+
+	// 		console.log(this.isEnnemyOnTheCase(this.hero.x, this.hero.y));
+	// 		console.log(this.isHeroOnTheMaps());
+	// 		if (this.isEnnemyOnTheCase(this.hero.x, this.hero.y)) {
+	// 			messages = "ne peut pas se déplacer sur présence d'ennemy";
+	// 		} else if (this.isHeroOnTheMaps) {
+	// 			messages = 'déplacement hors de la carte impossible';
 	// 		} else {
-	// 			false && console.log("true")
+	// 			return oldPosition;
 	// 		}
+	// 		document.getElementById('error').innerText = messages;
+	// 		this.hero.x = oldPosition.x;
+	// 		this.hero.y = oldPosition.y;
+	// 		console.log(this.hero.x + ',' + this.hero.y);
 	// 	}
+	// 	isEnnemyOnTheCase() {
+	// 		return this.monsters.some((monster) => {
+	// 			monster.x === this.hero.x || monster.y === this.hero.y;
+	// 		});
+	// 	}
+	// 	isHeroOnTheMaps() {
+	// 		return (
+	// 			this.hero.x < 0 ||
+	// 			this.hero.x > this.size - 1 ||
+	// 			this.hero.y < 0 ||
+	// 			this.hero.y > this.size - 1
+	// 		);
+	// 	}
+	// }
+	move(direction) {
+		// OLD POSITION
+		let message = '';
+		const error = document.getElementById('error');
+		const oldPosition = {
+			x: this.hero.x,
+			y: this.hero.y,
+		};
 
+		// DESIRED MOVE
+		const wantedPosition = { x: this.hero.x, y: this.hero.y };
 
+		//déplacements plus intuitifs
+		if (direction === 'E') wantedPosition.x -= 1;
+		if (direction === 'W') wantedPosition.x += 1;
+		if (direction === 'N') wantedPosition.y -= 1;
+		if (direction === 'S') wantedPosition.y += 1;
+
+		// CONTROL FUNCTIONS
+		//check if the tile where Heracles wants to move stays on table
+		if (this.isOnMap(wantedPosition) === false) {
+			message = 'this tile is out of range';
+			wantedPosition.x = oldPosition.x;
+			wantedPosition.y = oldPosition.y;
+			error.innerText = message;
+		}
+		//check if the tile where Heracles wants to move is free
+		else if (this.isOnEnnemyTile(wantedPosition) === true) {
+			message = 'this tile is already occupied';
+			error.innerText = message;
+			wantedPosition.x = oldPosition.x;
+			wantedPosition.y = oldPosition.y;
+		} else {
+			error.innerText = '';
+			this.hero.x = wantedPosition.x;
+			this.hero.y = wantedPosition.y;
+		}
+
+		// NEW POSITION AFTER CONTROLS
+
+		return oldPosition;
 	}
-
+	isOnMap(wantedPosition) {
+		return (
+			wantedPosition.x < this.size &&
+			wantedPosition.x >= 0 &&
+			wantedPosition.y < this.size &&
+			wantedPosition.y >= 0
+		);
+	}
+	isOnEnnemyTile(wantedPosition) {
+		return this.monsters.some(
+			(monster) =>
+				monster.x === wantedPosition.x && monster.y === wantedPosition.y
+		);
+	}
+}

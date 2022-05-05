@@ -23,7 +23,9 @@ fighterHtml.createTemplate(heracles, mare1);
 
 /** Your code goes here */
 const arena = new Arena([mare1,mare2,mare3], heracles)
-const ArenaHTML = new ArenaTemplate('arena'); ArenaHTML.createArena(arena)
+const ArenaHTML = new ArenaTemplate('arena');
+ArenaHTML.createArena(arena);
+ArenaHTML.setMoveEvent(arena)
 
 /** Do not touch => allow the opening / closing of the hero information section */
 let openingModal = true;
