@@ -99,6 +99,7 @@ class Arena {
 			}
 			if (this.monsters[id].isAlive() === false) {
 				error.innerText = `${this.hero.name} won 🗡️  ${this.hero.life}/${this.hero.maxLife} 💙 ${this.monsters[id].name} is dead !!!`;
+				this.hero.updateExp(this.monsters[id]);
 				this.checkBattle();
 				return true;
 			}

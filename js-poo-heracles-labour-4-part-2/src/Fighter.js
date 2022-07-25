@@ -13,7 +13,7 @@ class Fighter {
 		this.armorPiercing = 0;
 		this.life = maxLife;
 		this.critDmg = 1 + this.strength / 100;
-		this.experience = 0;
+		this.experience = null;
 	}
 
 	getRange() {
@@ -96,5 +96,11 @@ class Fighter {
 	}
 	isAlive() {
 		return this.life > 0;
+	}
+	updateExp(exp) {
+		this.experience += exp.experience;
+	}
+	getLevel() {
+		return Math.ceil(this.experience / 1000);
 	}
 }

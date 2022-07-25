@@ -10,7 +10,8 @@ class Monster extends Fighter {
 		regen,
 		lifeSteal,
 		armorPiercing,
-		life
+		life,
+		experience
 	) {
 		super(
 			name,
@@ -23,8 +24,10 @@ class Monster extends Fighter {
 			regen,
 			lifeSteal,
 			armorPiercing,
-			life
+			life,
+			experience
 		);
+		this.experience = 500;
 	}
 	getRange() {
 		return this.range;

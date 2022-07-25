@@ -11,7 +11,8 @@ class Hero extends Fighter {
 		regen,
 		lifeSteal,
 		armorPiercing,
-		life
+		life,
+		experience
 	) {
 		super(
 			name,
@@ -25,8 +26,10 @@ class Hero extends Fighter {
 			regen,
 			lifeSteal,
 			armorPiercing,
-			life
+			life,
+			experience
 		);
+		this.experience = 1000;
 		this.weapon = null;
 		this.subWeapon = null;
 		this.shield = null;
@@ -52,12 +55,14 @@ class Hero extends Fighter {
 	}
 
 	getDamage() {
-		return this.weapon ? this.strength + this.weapon.damage : this.strength;
+		return this.weapon
+			? this.getStrength() + this.weapon.damage
+			: this.getStrength();
 	}
 	getSubDamage() {
 		return this.subWeapon
-			? this.strength + this.subWeapon.damage
-			: this.strength;
+			? this.getStrength() + this.subWeapon.damage
+			: this.getStrength();
 	}
 	//stats réel en combat
 	getDefence(defender, attacker) {
@@ -134,6 +139,20 @@ class Hero extends Fighter {
 		if (this.life <= this.maxLife / 2 && this.lifePotion > 0) {
 			this.lifePotion -= 1;
 			this.life = this.life + this.maxLife * 0.5;
+		}
+	}
+	getStrength() {
+		if (this.getLevel() === 1) {
+			return this.strength;
+		} else {
+			return this.strength * (1 + (this.getLevel() - 1) / 4);
+		}
+	}
+	getDexterity() {
+		if (this.getLevel() === 1) {
+			return this.dexterity;
+		} else {
+			return this.dexterity * (1 + (this.getLevel() - 1) / 4);
 		}
 	}
 }
